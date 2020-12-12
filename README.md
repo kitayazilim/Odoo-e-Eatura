@@ -1,2 +1,2 @@
-# Odoo e-Eatura
-Odoo e-Eatura
+# Odoo e-Fatura
+Odoo e-Fatura
