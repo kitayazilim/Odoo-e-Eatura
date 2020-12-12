@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>	
+	<record id="wzd_cancel_invoice" model="ir.ui.view">
+		<field name="name">wzd.cancel.invoice</field>
+		<field name="model">account.move</field>
+		<field name="arch" type="xml">
+			<form string="Message">	 
+				 <div class="mb16">Gider pusulası ya da iade faturası ile işlem tahsis edilebiliyor ise</div>
+				 <div class="mb16">e-Arşiv Fatura iptali söz konusu olamaz.</div>
+				 <div class="mb16">Sorumluluk mükellefe aittir.</div>
+				 <div class="mb16">Fatura iptal edilecek Emin misiniz?.</div>			
+				<footer>		 
+					<button string="İptal Et" class="btn btn-primary" type="object" name="cancel_e_arsiv" />
+                    <button string="vazgeç" class="btn-secondary" special="cancel" />
+				</footer>
+			</form>
+		</field>	
+	</record>
+	
+	<act_window id="launch_wzd_cancel_einvoice"
+				name="e-Arsiv İptal Onayı"
+				view_mode="form"
+				res_model = "account.move"
+				view_id = "wzd_cancel_invoice"
+				context = " {'id': active_id}"				 
+				target="new"/>
+ 
+</odoo>	

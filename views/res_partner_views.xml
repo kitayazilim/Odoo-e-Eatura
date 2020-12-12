@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_partner_efatura_field_form" model="ir.ui.view">
+        <field name="name">res.partner.efatura_field.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="industry_id" position="after">  
+                <field name="e_invoice_type" />             
+                <field name="e_email" widget="email"/>           
+            </field>
+        </field>
+    </record>
+</odoo>

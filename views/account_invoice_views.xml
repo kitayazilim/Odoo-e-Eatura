@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="electronic_invoice_form" model="ir.ui.view">
+        <field name="name">account.electronic.invoice.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <button name="action_invoice_sent" position="after">
+                <button name="send_efat" string="GİB'e Gönder" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('e_recordtype', 'not in', ('0', '1'))]}" />
+                <button name="get_efat_Pdf" string="Pdf" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('e_recordtype', 'not in', ('0', '1'))]}" />
+                <button name="get_email_detail" string="e-Posta Detayı" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('e_recordtype', '!=', '0')]}"/>
+                <button name="%(launch_wzd_cancel_einvoice)d" string="e-Arşiv İptal" type="action" class="oe_highlight" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('e_recordtype', '!=', '0')]}"/>
+                <button name="get_outbox_envelope" string="Hata Sor" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('e_recordtype', '!=', '1')]}"/>            
+            </button>
+            
+            <notebook position="inside">
+                <page string="e-Fatura">
+                    <group>
+                        <field name="e_recordtype"/>
+                        <field name="digital_invoice_type"/>
+                        <field name="e_invoicetype"/>
+                        <field name="invoice_unique_id" readonly="1" />                        
+                        <field name="invoice_status_text"  readonly="1" />
+                        <field name="invoice_mail_text"   readonly="1" />                                          
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>     
+</odoo>
+ 

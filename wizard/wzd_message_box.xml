@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>	
+	<record id="wzd_message_box" model="ir.ui.view">
+		<field name="name">wzd.message.box</field>
+		<field name="model">wzd.message.box</field>
+		<field name="arch" type="xml">
+			<form string="Message">
+				<field name="name"/>			
+				<footer>
+					<button string="Tamam" class="btn-primary" special="cancel" />
+				</footer>
+			</form>
+		</field>	
+	</record>
+	
+	<act_window id="launch_wzd_message_box"
+				name="Show Mesaage"			    
+				res_model="wzd.message.box"				
+				view_mode="form"
+				view_id = "wzd_message_box"
+				target="new"/>
+ 
+</odoo>	
