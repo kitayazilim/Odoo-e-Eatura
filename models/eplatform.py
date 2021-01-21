@@ -80,7 +80,7 @@ def send_invoice(account, partner, lines):
             "receiverPersonSurName": None if len(j2n(partner.vat)) == 10 else SurName,
             # "registerNumber": "1111222243",  # tc sicil no
             "identificationNumber": j2n(partner.vat),
-            "alias": getattr(partner, 'e_email', None),
+            "alias": partner.e_email or None,
             "receiverStreet": partner.street or None,
             "receiverDistrict": partner.city or None,
             "receiverZipCode": partner.zip or None,
@@ -88,8 +88,8 @@ def send_invoice(account, partner, lines):
             "receiverCountry": partner.country_id.name or None,
             "receiverPhoneNumber": partner.phone or None,
             "receiverEmail": partner.email or None,
-            "receiverWebSite": getattr(partner, 'website'),
-            "receiverTaxOffice": getattr(partner, 'tax_office_id.name', None)
+            "receiverWebSite": partner.website or None,
+            "receiverTaxOffice": partner.tax_office_id and partner.tax_office_id.name or None
         },
         "generalInfoModel": {
             "ettn": None,
@@ -135,7 +135,7 @@ def send_invoice(account, partner, lines):
             'amount': line.quantity,
             'discountAmount': round(line.price_unit * line.quantity, 2) - line.price_subtotal,
             'lineAmount': line.price_subtotal,
-            'unitCode': getattr(line.product_uom_id, 'code', "C62"),
+            'unitCode': line.product_uom_id and line.product_uom_id.code or 'C62',
             'unitPrice':  line.price_unit,
             'discountRate': line.discount
         }
@@ -143,7 +143,7 @@ def send_invoice(account, partner, lines):
         tax = {}
         vat_rate = None
         if line.tax_ids.amount_type == "percent":
-            vat_rate = getattr(line.tax_ids, 'amount', "18")
+            vat_rate = line.tax_ids and line.tax_ids.amount or '18'
         elif line.tax_ids.amount_type == "group" and line.tax_ids.code == "9015":
             data['taxes'] = []
             data["disableVatExemption"]: True
